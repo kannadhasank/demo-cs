@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# CSDB Management Application - Setup Script
+# This script will set up your development environment
+
+echo "🚀 CSDB Management Application Setup"
+echo "======================================"
+echo ""
+
+# Check if Node.js is installed
+if ! command -v node &> /dev/null; then
+    echo "❌ Node.js is not installed. Please install Node.js 16+ first."
+    echo "   Download from: https://nodejs.org/"
+    exit 1
+fi
+
+echo "✅ Node.js version: $(node --version)"
+
+# Check if npm is installed
+if ! command -v npm &> /dev/null; then
+    echo "❌ npm is not installed. Please install npm first."
+    exit 1
+fi
+
+echo "✅ npm version: $(npm --version)"
+echo ""
+
+# Install dependencies
+echo "📦 Installing dependencies..."
+npm install
+
+if [ $? -eq 0 ]; then
+    echo "✅ Dependencies installed successfully!"
+else
+    echo "❌ Failed to install dependencies."
+    exit 1
+fi
+
+echo ""
+echo "🎉 Setup Complete!"
+echo ""
+echo "Quick Commands:"
+echo "  npm run dev          - Start development server"
+echo "  npm run storybook    - Start component library"
+echo "  npm run build        - Build for production"
+echo ""
+echo "📖 For more information, see:"
+echo "  - QUICKSTART.md for quick start guide"
+echo "  - README.md for full documentation"
+echo "  - PROJECT_SUMMARY.md for project overview"
+echo ""
+echo "Happy coding! 🚀"
