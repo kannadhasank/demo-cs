@@ -1,77 +1,43 @@
-import axios from 'axios';
+import api from './api';
 import { jwtDecode } from 'jwt-decode';
-
-// Mock data for development
-const MOCK_USER = {
-  id: 1,
-  name: 'John Smith',
-  email: 'john.smith@csdb.com',
-  role: 'admin',
-};
-
-// Generate a mock JWT token
-const generateMockToken = (user) => {
-  // This is a mock token - in production, this comes from the backend
-  const payload = {
-    userId: user.id,
-    email: user.email,
-    role: user.role,
-    exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24, // 24 hours
-  };
-  
-  // Mock token (not a real JWT, just for demonstration)
-  return `mock.${btoa(JSON.stringify(payload))}.signature`;
-};
 
 // Login user
 const login = async (userData) => {
-  // TODO: Replace with actual API call
-  // const response = await axios.post('/api/auth/login', userData);
-  
-  // Mock login logic
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (userData.email && userData.password) {
-        const token = generateMockToken(MOCK_USER);
-        const user = MOCK_USER;
-        
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
-        
-        resolve({ user, token });
-      } else {
-        reject(new Error('Invalid credentials'));
-      }
-    }, 1000);
-  });
-};
+  try {
+    // Call backend login API
+    const response = await api.post('/Auth/login', {
+      username: userData.email || userData.username,
+      password: userData.password,
+    });
 
-// Register user
-const register = async (userData) => {
-  // TODO: Replace with actual API call
-  // const response = await axios.post('/api/auth/register', userData);
-  
-  // Mock register logic
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (userData.email && userData.password && userData.name) {
-        const user = {
-          id: Date.now(),
-          name: userData.name,
-          email: userData.email,
-          role: 'user',
-        };
-        const token = generateMockToken(user);
-        
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
-        
-        resolve({ user, token });
-      } else {
-        reject(new Error('Registration failed'));
-      }
-    }, 1000);
-  });
+    // Extract data from backend response
+    const { token, username, email, expiresAt } = response.data;
+
+    // Decode JWT token to extract claims
+    const decoded = jwtDecode(token);
+
+    // Create user object from token claims and response
+    const user = {
+      id: decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+      name: username,
+      email: email,
+      username: username,
+      expiresAt: expiresAt,
+    };
+
+    // Store token and user data in localStorage
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+
+    return { user, token };
+  } catch (error) {
+    // Clear any existing auth data on error
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    // Re-throw error with message
+    throw error;
+  }
 };
 
 // Logout user
@@ -116,7 +82,6 @@ const verifyToken = (token) => {
 
 const authService = {
   login,
-  register,
   logout,
   getCurrentUser,
   verifyToken,

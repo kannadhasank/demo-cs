@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from './api';
 
 // Mock CAGE data
 const MOCK_CAGES = [
@@ -106,9 +106,10 @@ const MOCK_CAGES = [
 
 // Get all cages
 const getCages = async (params = {}) => {
-  // TODO: Replace with actual API call
-  // const response = await axios.get('/api/cages', { params });
-  
+  // TODO: Replace mock data with actual API call when backend is ready
+  // Example: const response = await api.get('/cages', { params });
+  // return response.data;
+
   return new Promise((resolve) => {
     setTimeout(() => {
       const { page = 1, perPage = 10, search = '' } = params;

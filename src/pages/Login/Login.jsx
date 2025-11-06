@@ -52,15 +52,11 @@ const Login = () => {
     const newErrors = {};
 
     if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = 'Username is required';
     }
 
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
     }
 
     return newErrors;
@@ -130,7 +126,7 @@ const Login = () => {
 
               <Input
                 label={t('auth.email')}
-                type="email"
+                type="text"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
