@@ -30,6 +30,16 @@ const Sidebar = () => {
       path: '/dashboard',
     },
     {
+      id: 'cage',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18" strokeWidth="2" />
+        </svg>
+      ),
+      label: t('navigation.cage'),
+      path: '/cage-management',
+    },
+    {
       id: 'projects',
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">

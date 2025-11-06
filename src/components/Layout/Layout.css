@@ -27,12 +27,32 @@
 .main-content {
   flex: 1;
   padding: 24px;
+  padding-bottom: calc(24px + var(--footer-height));
   background-color: var(--bg-secondary);
   overflow-x: auto;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 968px) {
+  .content-wrapper {
+    width: 100% !important; /* Full width on mobile since sidebar is overlay */
+  }
 }
 
 @media (max-width: 768px) {
   .main-content {
     padding: 16px;
+    padding-bottom: calc(16px + var(--footer-height));
+  }
+
+  .main-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 12px;
+    padding-bottom: calc(12px + var(--footer-height));
   }
 }

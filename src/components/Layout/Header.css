@@ -174,3 +174,64 @@
 .dropdown-item:last-child {
   border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 12px;
+  }
+
+  .header-left {
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .logo-text {
+    display: none; /* Hide logo text on small screens */
+  }
+
+  .header-right {
+    gap: 4px;
+  }
+
+  .language-selector {
+    display: none; /* Hide language selector on mobile */
+  }
+
+  .user-name {
+    display: none; /* Hide user name on mobile, keep avatar only */
+  }
+
+  .icon-button {
+    padding: 6px;
+  }
+
+  .user-button {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0 8px;
+  }
+
+  .header-right {
+    gap: 2px;
+  }
+
+  /* Hide some buttons on very small screens */
+  .header-right > .icon-button:not(:last-child) {
+    display: none;
+  }
+
+  /* Keep only user menu and theme toggle visible */
+  .header-right .icon-button[aria-label*="theme"],
+  .user-menu {
+    display: flex;
+  }
+}

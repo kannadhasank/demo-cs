@@ -29,8 +29,8 @@ function App() {
         >
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route element={<CAGEManagement />} />
-          <Route  element={<div>Projects Page</div>} />
+          <Route path="cage-management" element={<CAGEManagement />} />
+          <Route path="projects" element={<div>Projects Page</div>} />
           <Route path="data-module">
             <Route path="manage" element={<div>Manage Modules</div>} />
             <Route path="validate" element={<div>Data Validate</div>} />
@@ -39,7 +39,8 @@ function App() {
             <Route path="import" element={<div>Import</div>} />
             <Route path="export" element={<div>Export</div>} />
           </Route>
-          <Route  element={<div>Common Information Repository</div>} />
+          <Route path="entities" element={<div>Entities / Missed Entities Table</div>} />
+          <Route path="common-info" element={<div>Common Information Repository</div>} />
           <Route path="users" element={<div>Users Management</div>} />
           <Route path="settings" element={<div>Settings</div>} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />

@@ -16,6 +16,7 @@
   },
   "navigation": {
     "dashboard": "Tableau de bord",
+    "cage": "Gestion CAGE",
     "dataModule": "Module de données",
     "publications": "Publications",
     "informationSets": "Ensembles d'informations",
