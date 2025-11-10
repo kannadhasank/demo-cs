@@ -3,6 +3,7 @@ import authReducer from './slices/authSlice';
 import themeReducer from './slices/themeSlice';
 import sidebarReducer from './slices/sidebarSlice';
 import cageReducer from './slices/cageSlice';
+import endItemReducer from './slices/endItemSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     theme: themeReducer,
     sidebar: sidebarReducer,
     cage: cageReducer,
+    endItem: endItemReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

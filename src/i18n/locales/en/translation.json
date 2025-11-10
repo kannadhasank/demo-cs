@@ -17,6 +17,7 @@
   "navigation": {
     "dashboard": "Dashboard",
     "cage": "CAGE Management",
+    "endItem": "End Item",
     "dataModule": "Data Module",
     "publications": "Publications",
     "informationSets": "Information sets",

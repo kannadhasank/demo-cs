@@ -15,7 +15,7 @@ const Dashboard = () => {
           <rect x="3" y="3" width="18" height="18" rx="2" strokeWidth="2" />
         </svg>
       ),
-      color: '#2196f3',
+      colorClass: 'stat-info',
     },
     {
       title: 'Data Modules',
@@ -25,7 +25,7 @@ const Dashboard = () => {
           <rect x="2" y="3" width="20" height="14" rx="2" strokeWidth="2" />
         </svg>
       ),
-      color: '#4caf50',
+      colorClass: 'stat-success',
     },
     {
       title: 'Active Users',
@@ -36,7 +36,7 @@ const Dashboard = () => {
           <circle cx="9" cy="7" r="4" strokeWidth="2" />
         </svg>
       ),
-      color: '#ff9800',
+      colorClass: 'stat-warning',
     },
     {
       title: 'Publications',
@@ -46,7 +46,7 @@ const Dashboard = () => {
           <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" strokeWidth="2" />
         </svg>
       ),
-      color: '#9c27b0',
+      colorClass: 'stat-purple',
     },
   ];
 
@@ -62,7 +62,7 @@ const Dashboard = () => {
       <div className="stats-grid">
         {stats.map((stat, index) => (
           <div key={index} className="stat-card">
-            <div className="stat-icon" style={{ backgroundColor: `${stat.color}15`, color: stat.color }}>
+            <div className={`stat-icon ${stat.colorClass}`}>
               {stat.icon}
             </div>
             <div className="stat-content">

@@ -11,6 +11,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 2,
@@ -21,6 +23,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 3,
@@ -31,6 +35,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 4,
@@ -41,6 +47,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 5,
@@ -51,6 +59,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 6,
@@ -61,6 +71,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 7,
@@ -71,6 +83,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 8,
@@ -81,6 +95,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 9,
@@ -91,6 +107,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
   {
     id: 10,
@@ -101,6 +119,8 @@ const MOCK_CAGES = [
     state: 'Lorem ipsum',
     country: 'Lorem ipsum',
     postCode: '85720',
+    commandLanguage: 'English',
+    remarks: '',
   },
 ];
 
@@ -139,7 +159,7 @@ const getCages = async (params = {}) => {
           totalPages: Math.ceil(total / perPage),
         },
       });
-    }, 500);
+    }, 300);
   });
 };
 
@@ -147,17 +167,17 @@ const getCages = async (params = {}) => {
 const getCage = async (id) => {
   // TODO: Replace with actual API call
   // const response = await axios.get(`/api/cages/${id}`);
-  
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const cage = MOCK_CAGES.find((c) => c.id === parseInt(id));
-      
+
       if (cage) {
         resolve(cage);
       } else {
         reject(new Error('CAGE not found'));
       }
-    }, 500);
+    }, 300);
   });
 };
 
@@ -165,17 +185,17 @@ const getCage = async (id) => {
 const createCage = async (cageData) => {
   // TODO: Replace with actual API call
   // const response = await axios.post('/api/cages', cageData);
-  
+
   return new Promise((resolve) => {
     setTimeout(() => {
       const newCage = {
         id: Date.now(),
         ...cageData,
       };
-      
+
       MOCK_CAGES.push(newCage);
       resolve(newCage);
-    }, 500);
+    }, 300);
   });
 };
 
@@ -183,18 +203,18 @@ const createCage = async (cageData) => {
 const updateCage = async (id, cageData) => {
   // TODO: Replace with actual API call
   // const response = await axios.put(`/api/cages/${id}`, cageData);
-  
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const index = MOCK_CAGES.findIndex((c) => c.id === parseInt(id));
-      
+
       if (index !== -1) {
         MOCK_CAGES[index] = { ...MOCK_CAGES[index], ...cageData };
         resolve(MOCK_CAGES[index]);
       } else {
         reject(new Error('CAGE not found'));
       }
-    }, 500);
+    }, 300);
   });
 };
 
@@ -202,18 +222,18 @@ const updateCage = async (id, cageData) => {
 const deleteCage = async (id) => {
   // TODO: Replace with actual API call
   // const response = await axios.delete(`/api/cages/${id}`);
-  
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const index = MOCK_CAGES.findIndex((c) => c.id === parseInt(id));
-      
+
       if (index !== -1) {
         MOCK_CAGES.splice(index, 1);
         resolve(id);
       } else {
         reject(new Error('CAGE not found'));
       }
-    }, 500);
+    }, 300);
   });
 };
 

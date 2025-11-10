@@ -1,16 +1,23 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ToastProvider } from './contexts/ToastContext';
+import { SideSheetProvider } from './contexts/SideSheetContext';
+import { EndItemProvider } from './contexts/EndItemContext';
 import Layout from './components/Layout/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import CAGEManagement from './pages/CAGEManagement/CAGEManagement';
+import EndItems from './pages/EndItems/EndItems';
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
-    <Router>
+    <ToastProvider>
+      <SideSheetProvider>
+        <EndItemProvider>
+          <Router>
       <Routes>
         {/* Public routes */}
         <Route
@@ -30,6 +37,7 @@ function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="cage-management" element={<CAGEManagement />} />
+          <Route path="end-items" element={<EndItems />} />
           <Route path="projects" element={<div>Projects Page</div>} />
           <Route path="data-module">
             <Route path="manage" element={<div>Manage Modules</div>} />
@@ -49,7 +57,10 @@ function App() {
         {/* Catch all */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
-    </Router>
+          </Router>
+        </EndItemProvider>
+      </SideSheetProvider>
+    </ToastProvider>
   );
 }
 

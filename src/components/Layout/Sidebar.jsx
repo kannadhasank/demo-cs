@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { toggleMenu } from '@store/slices/sidebarSlice';
 import './Sidebar.css';
@@ -7,6 +7,7 @@ import './Sidebar.css';
 const Sidebar = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const location = useLocation();
   const { isOpen, expandedMenus } = useSelector((state) => state.sidebar);
 
   const handleMenuToggle = (menuId) => {
@@ -14,6 +15,10 @@ const Sidebar = () => {
   };
 
   const isMenuExpanded = (menuId) => expandedMenus.includes(menuId);
+
+  const isParentActive = (submenu) => {
+    return submenu?.some((subitem) => location.pathname === subitem.path);
+  };
 
   const menuItems = [
     {
@@ -38,6 +43,16 @@ const Sidebar = () => {
       ),
       label: t('navigation.cage'),
       path: '/cage-management',
+    },
+    {
+      id: 'endItem',
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M9 2v6h6V2M9 8l-7 4v10l7 4 7-4V12l-7-4z" strokeWidth="2" />
+        </svg>
+      ),
+      label: t('navigation.endItem'),
+      path: '/end-items',
     },
     {
       id: 'projects',
@@ -132,7 +147,7 @@ const Sidebar = () => {
                 <button
                   className={`menu-item menu-item-expandable ${
                     isMenuExpanded(item.id) ? 'expanded' : ''
-                  }`}
+                  } ${isParentActive(item.submenu) ? 'active' : ''}`}
                   onClick={() => handleMenuToggle(item.id)}
                 >
                   <span className="menu-icon">{item.icon}</span>

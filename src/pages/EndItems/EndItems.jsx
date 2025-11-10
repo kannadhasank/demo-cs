@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { getCages, createCage, updateCage, deleteCage, reset } from '@store/slices/cageSlice';
+import { getEndItems, createEndItem, updateEndItem, deleteEndItem, reset } from '@store/slices/endItemSlice';
 import {
   Table,
   TableBody,
@@ -20,40 +20,54 @@ import SearchIcon from '@mui/icons-material/Search';
 import ConfirmDialog from '@common/ConfirmDialog/ConfirmDialog';
 import { useToast } from '@contexts/ToastContext';
 import { useSideSheet } from '@contexts/SideSheetContext';
-import CageForm from './CageForm';
-import './CAGEManagement.css';
+import { useEndItem } from '@contexts/EndItemContext';
+import EndItemForm from './EndItemForm';
+import './EndItems.css';
 
-const CAGEManagement = () => {
+const EndItems = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { cages, isSaving, isSuccess, pagination } = useSelector((state) => state.cage);
+  const { endItems, isSaving, isSuccess, pagination } = useSelector((state) => state.endItem);
   const { showToast } = useToast();
   const { openSideSheet, closeSideSheet } = useSideSheet();
+  const { selectEndItem, updateEndItems } = useEndItem();
+
+  const handleSelectEndItem = (item) => {
+    selectEndItem(item);
+    showToast(`End item "${item.name}" selected`, 'success');
+  };
 
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isSideSheetOpen, setIsSideSheetOpen] = useState(false);
-  const [currentCage, setCurrentCage] = useState(null);
+  const [currentEndItem, setCurrentEndItem] = useState(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
   const [lastAction, setLastAction] = useState(null);
 
   useEffect(() => {
-    dispatch(getCages({ page: page + 1, perPage: rowsPerPage, search: searchTerm }));
+    dispatch(getEndItems({ page: page + 1, perPage: rowsPerPage, search: searchTerm }));
   }, [dispatch, page, rowsPerPage, searchTerm]);
+
+  // Update the endItems context when data changes
+  useEffect(() => {
+    if (endItems && endItems.length > 0) {
+      updateEndItems(endItems);
+    }
+  }, [endItems, updateEndItems]);
 
   useEffect(() => {
     if (isSuccess && isSideSheetOpen) {
       closeSideSheet();
       setIsSideSheetOpen(false);
-      setCurrentCage(null);
+      setCurrentEndItem(null);
 
       // Show success toast
       if (lastAction === 'create') {
-        showToast('CAGE created successfully', 'success');
+        showToast('End item created successfully', 'success');
       } else if (lastAction === 'update') {
-        showToast('CAGE updated successfully', 'success');
+        showToast('End item updated successfully', 'success');
       }
 
       setLastAction(null);
@@ -64,7 +78,7 @@ const CAGEManagement = () => {
       setItemToDelete(null);
 
       // Show delete success toast
-      showToast('CAGE deleted successfully', 'success');
+      showToast('End item deleted successfully', 'success');
 
       dispatch(reset());
     }
@@ -85,46 +99,42 @@ const CAGEManagement = () => {
   };
 
   const columns = [
-    { id: 'cageCode', label: 'CAGE Code' },
-    { id: 'name', label: 'Company Name' },
-    { id: 'street', label: 'Street' },
-    { id: 'city', label: 'City' },
-    { id: 'state', label: 'State' },
-    { id: 'country', label: 'Country' },
-    { id: 'postCode', label: 'Post code' },
+    { id: 'name', label: 'End item name' },
+    { id: 'specification', label: 'Specification' },
+    { id: 'issue', label: 'Issue (S1000D)' },
     { id: 'actions', label: '' }
   ];
 
-  const handleOpenSideSheet = (cage = null) => {
+  const handleOpenSideSheet = (endItem = null) => {
     dispatch(reset()); // Reset any previous success state
-    setCurrentCage(cage);
+    setCurrentEndItem(endItem);
     setIsSideSheetOpen(true);
 
     openSideSheet(
-      cage ? 'Edit CAGE' : 'Add CAGE',
-      <CageForm
-        initialData={cage}
-        onSave={handleSaveCage}
+      endItem ? 'Edit End item' : 'Add End item',
+      <EndItemForm
+        initialData={endItem}
+        onSave={handleSaveEndItem}
         onCancel={handleCloseSideSheet}
         isLoading={isSaving}
       />,
-      '480px'
+      '400px'
     );
   };
 
   const handleCloseSideSheet = () => {
     closeSideSheet();
     setIsSideSheetOpen(false);
-    setCurrentCage(null);
+    setCurrentEndItem(null);
   };
 
-  const handleSaveCage = (formData) => {
-    if (currentCage) {
+  const handleSaveEndItem = (formData) => {
+    if (currentEndItem) {
       setLastAction('update');
-      dispatch(updateCage({ id: currentCage.id, data: formData }));
+      dispatch(updateEndItem({ id: currentEndItem.id, data: formData }));
     } else {
       setLastAction('create');
-      dispatch(createCage(formData));
+      dispatch(createEndItem(formData));
     }
   };
 
@@ -140,22 +150,22 @@ const CAGEManagement = () => {
 
   const handleConfirmDelete = () => {
     if (itemToDelete) {
-      dispatch(deleteCage(itemToDelete.id));
+      dispatch(deleteEndItem(itemToDelete.id));
     }
   };
 
   return (
-    <div className="cage-management">
+    <div className="end-items">
       {/* Header with Title and Search */}
-      <div className="cage-header">
-        <h1 className="page-title">CAGE</h1>
+      <div className="end-items-header">
+        <h1 className="page-title">End Items</h1>
 
         <div className="header-actions">
           <div className="search-box">
             <SearchIcon sx={{ fontSize: 18 }} />
             <input
               type="text"
-              placeholder="Search for CAGE Code"
+              placeholder="Search end item"
               value={searchTerm}
               onChange={handleSearch}
               className="search-input"
@@ -185,24 +195,25 @@ const CAGEManagement = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {cages.length === 0 ? (
+              {endItems.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={columns.length}>
                     <Box className="empty-state">
-                      <Typography>There are no CAGE available</Typography>
+                      <Typography>There are no End Item available</Typography>
                     </Box>
                   </TableCell>
                 </TableRow>
               ) : (
-                cages.map((item) => (
-                  <TableRow key={item.id} hover>
-                    <TableCell>{item.cageCode}</TableCell>
+                endItems.map((item) => (
+                  <TableRow
+                    key={item.id}
+                    hover
+                    onDoubleClick={() => handleSelectEndItem(item)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     <TableCell>{item.name}</TableCell>
-                    <TableCell>{item.street}</TableCell>
-                    <TableCell>{item.city}</TableCell>
-                    <TableCell>{item.state}</TableCell>
-                    <TableCell>{item.country}</TableCell>
-                    <TableCell>{item.postCode}</TableCell>
+                    <TableCell>{item.specification}</TableCell>
+                    <TableCell>{item.issue}</TableCell>
                     <TableCell align="right">
                       <IconButton size="small" title="Edit" onClick={() => handleOpenSideSheet(item)}>
                         <Edit fontSize="small" />
@@ -223,7 +234,7 @@ const CAGEManagement = () => {
       </Paper>
 
       {/* Pagination - Outside table card */}
-      {cages.length > 0 && (
+      {endItems.length > 0 && (
         <TablePagination
           component="div"
           count={pagination.total}
@@ -240,7 +251,7 @@ const CAGEManagement = () => {
       <ConfirmDialog
         open={isDeleteDialogOpen}
         title="Are you sure you want to delete?"
-        message={itemToDelete ? `${itemToDelete.cageCode}` : ''}
+        message={itemToDelete ? `${itemToDelete.name}` : ''}
         confirmText="Delete"
         cancelText="Cancel"
         onConfirm={handleConfirmDelete}
@@ -250,4 +261,4 @@ const CAGEManagement = () => {
   );
 };
 
-export default CAGEManagement;
+export default EndItems;

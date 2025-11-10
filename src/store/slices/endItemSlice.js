@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import cageService from '@services/cageService';
+import endItemService from '@services/endItemService';
 
 const initialState = {
-  cages: [],
-  currentCage: null,
+  endItems: [],
+  currentEndItem: null,
   isLoading: false,
   isSaving: false,
   isSuccess: false,
@@ -16,10 +16,10 @@ const initialState = {
   },
 };
 
-// Get all cages
-export const getCages = createAsyncThunk('cage/getAll', async (params, thunkAPI) => {
+// Get all end items
+export const getEndItems = createAsyncThunk('endItem/getAll', async (params, thunkAPI) => {
   try {
-    return await cageService.getCages(params);
+    return await endItemService.getEndItems(params);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -29,10 +29,10 @@ export const getCages = createAsyncThunk('cage/getAll', async (params, thunkAPI)
   }
 });
 
-// Get single cage
-export const getCage = createAsyncThunk('cage/getOne', async (id, thunkAPI) => {
+// Get single end item
+export const getEndItem = createAsyncThunk('endItem/getOne', async (id, thunkAPI) => {
   try {
-    return await cageService.getCage(id);
+    return await endItemService.getEndItem(id);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -42,10 +42,10 @@ export const getCage = createAsyncThunk('cage/getOne', async (id, thunkAPI) => {
   }
 });
 
-// Create cage
-export const createCage = createAsyncThunk('cage/create', async (cageData, thunkAPI) => {
+// Create end item
+export const createEndItem = createAsyncThunk('endItem/create', async (endItemData, thunkAPI) => {
   try {
-    return await cageService.createCage(cageData);
+    return await endItemService.createEndItem(endItemData);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -55,10 +55,10 @@ export const createCage = createAsyncThunk('cage/create', async (cageData, thunk
   }
 });
 
-// Update cage
-export const updateCage = createAsyncThunk('cage/update', async ({ id, data }, thunkAPI) => {
+// Update end item
+export const updateEndItem = createAsyncThunk('endItem/update', async ({ id, data }, thunkAPI) => {
   try {
-    return await cageService.updateCage(id, data);
+    return await endItemService.updateEndItem(id, data);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -68,10 +68,10 @@ export const updateCage = createAsyncThunk('cage/update', async ({ id, data }, t
   }
 });
 
-// Delete cage
-export const deleteCage = createAsyncThunk('cage/delete', async (id, thunkAPI) => {
+// Delete end item
+export const deleteEndItem = createAsyncThunk('endItem/delete', async (id, thunkAPI) => {
   try {
-    return await cageService.deleteCage(id);
+    return await endItemService.deleteEndItem(id);
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
@@ -81,8 +81,8 @@ export const deleteCage = createAsyncThunk('cage/delete', async (id, thunkAPI) =
   }
 });
 
-export const cageSlice = createSlice({
-  name: 'cage',
+export const endItemSlice = createSlice({
+  name: 'endItem',
   initialState,
   reducers: {
     reset: (state) => {
@@ -91,78 +91,78 @@ export const cageSlice = createSlice({
       state.isError = false;
       state.message = '';
     },
-    setCurrentCage: (state, action) => {
-      state.currentCage = action.payload;
+    setCurrentEndItem: (state, action) => {
+      state.currentEndItem = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCages.pending, (state) => {
+      .addCase(getEndItems.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCages.fulfilled, (state, action) => {
+      .addCase(getEndItems.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.cages = action.payload.data;
+        state.endItems = action.payload.data;
         state.pagination = action.payload.pagination;
       })
-      .addCase(getCages.rejected, (state, action) => {
+      .addCase(getEndItems.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(getCage.pending, (state) => {
+      .addCase(getEndItem.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getCage.fulfilled, (state, action) => {
+      .addCase(getEndItem.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.currentCage = action.payload;
+        state.currentEndItem = action.payload;
       })
-      .addCase(getCage.rejected, (state, action) => {
+      .addCase(getEndItem.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(createCage.pending, (state) => {
+      .addCase(createEndItem.pending, (state) => {
         state.isSaving = true;
       })
-      .addCase(createCage.fulfilled, (state, action) => {
+      .addCase(createEndItem.fulfilled, (state, action) => {
         state.isSaving = false;
         state.isSuccess = true;
-        state.cages.push(action.payload);
+        state.endItems.push(action.payload);
       })
-      .addCase(createCage.rejected, (state, action) => {
+      .addCase(createEndItem.rejected, (state, action) => {
         state.isSaving = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(updateCage.pending, (state) => {
+      .addCase(updateEndItem.pending, (state) => {
         state.isSaving = true;
       })
-      .addCase(updateCage.fulfilled, (state, action) => {
+      .addCase(updateEndItem.fulfilled, (state, action) => {
         state.isSaving = false;
         state.isSuccess = true;
-        const index = state.cages.findIndex((cage) => cage.id === action.payload.id);
+        const index = state.endItems.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
-          state.cages[index] = action.payload;
+          state.endItems[index] = action.payload;
         }
-        state.currentCage = action.payload;
+        state.currentEndItem = action.payload;
       })
-      .addCase(updateCage.rejected, (state, action) => {
+      .addCase(updateEndItem.rejected, (state, action) => {
         state.isSaving = false;
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(deleteCage.pending, (state) => {
+      .addCase(deleteEndItem.pending, (state) => {
         state.isSaving = true;
       })
-      .addCase(deleteCage.fulfilled, (state, action) => {
+      .addCase(deleteEndItem.fulfilled, (state, action) => {
         state.isSaving = false;
         state.isSuccess = true;
-        state.cages = state.cages.filter((cage) => cage.id !== action.payload);
+        state.endItems = state.endItems.filter((item) => item.id !== action.payload);
       })
-      .addCase(deleteCage.rejected, (state, action) => {
+      .addCase(deleteEndItem.rejected, (state, action) => {
         state.isSaving = false;
         state.isError = true;
         state.message = action.payload;
@@ -170,5 +170,5 @@ export const cageSlice = createSlice({
   },
 });
 
-export const { reset, setCurrentCage } = cageSlice.actions;
-export default cageSlice.reducer;
+export const { reset, setCurrentEndItem } = endItemSlice.actions;
+export default endItemSlice.reducer;

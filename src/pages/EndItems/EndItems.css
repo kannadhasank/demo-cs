@@ -1,9 +1,9 @@
-.cage-management {
+.end-items {
   width: 100%;
 }
 
 /* Header */
-.cage-header {
+.end-items-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,7 +26,7 @@
 }
 
 /* Search Box */
-.cage-management .search-box {
+.end-items .search-box {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -37,14 +37,14 @@
   min-width: 250px;
 }
 
-.cage-management .search-box svg {
+.end-items .search-box svg {
   color: var(--text-tertiary);
   flex-shrink: 0;
   width: 18px;
   height: 18px;
 }
 
-.cage-management .search-input {
+.end-items .search-input {
   flex: 1;
   border: none;
   background: none;
@@ -53,12 +53,12 @@
   font-size: 14px;
 }
 
-.cage-management .search-input::placeholder {
+.end-items .search-input::placeholder {
   color: var(--text-tertiary);
 }
 
 /* Icon Buttons */
-.cage-management .icon-button {
+.end-items .icon-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,97 +72,96 @@
   transition: all var(--transition-speed);
 }
 
-.cage-management .icon-button:hover {
+.end-items .icon-button:hover {
   background-color: rgba(0, 0, 0, 0.05);
   color: var(--text-primary);
 }
 
-[data-theme='dark'] .cage-management .icon-button:hover {
+[data-theme='dark'] .end-items .icon-button:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Material-UI Table Overrides */
-.cage-management .table-card {
+.end-items .table-card {
   background-color: var(--bg-card) !important;
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: hidden;
 }
 
-/* Table container with fixed height and vertical scroll */
-.cage-management .MuiTableContainer-root {
+.end-items .MuiTableContainer-root {
   border-radius: 0;
-  max-height: calc(100vh - 300px); /* Limit table height to viewport minus header/footer space */
-  overflow-y: auto; /* Enable vertical scrolling when content exceeds max height */
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
 }
 
-.cage-management .MuiTable-root {
+.end-items .MuiTable-root {
   background-color: var(--bg-card);
 }
 
-.cage-management .MuiTableHead-root {
+.end-items .MuiTableHead-root {
   background-color: var(--bg-secondary);
 }
 
-.cage-management .MuiTableCell-root {
+.end-items .MuiTableCell-root {
   border-color: var(--border-color);
   color: var(--text-primary);
   font-size: 13px;
   padding: 12px 16px;
 }
 
-.cage-management .MuiTableCell-head {
+.end-items .MuiTableCell-head {
   font-weight: 600;
   color: var(--text-primary);
 }
 
-.cage-management .MuiTableCell-body {
+.end-items .MuiTableCell-body {
   color: var(--text-secondary);
 }
 
-[data-theme='dark'] .cage-management .MuiTableCell-body {
+[data-theme='dark'] .end-items .MuiTableCell-body {
   color: #FFFFFF;
 }
 
-.cage-management .MuiTableRow-root:hover {
+.end-items .MuiTableRow-root:hover {
   background-color: var(--bg-secondary) !important;
 }
 
-.cage-management .pagination.MuiTablePagination-root {
+.end-items .pagination.MuiTablePagination-root {
   border: none;
   color: var(--text-primary);
   background: transparent;
   margin-top: 16px;
 }
 
-.cage-management .MuiTablePagination-selectLabel,
-.cage-management .MuiTablePagination-displayedRows {
+.end-items .MuiTablePagination-selectLabel,
+.end-items .MuiTablePagination-displayedRows {
   color: var(--text-primary);
   font-size: 13px;
 }
 
-.cage-management .MuiTablePagination-select {
+.end-items .MuiTablePagination-select {
   color: var(--text-primary);
 }
 
-.cage-management .MuiIconButton-root {
+.end-items .MuiIconButton-root {
   color: var(--text-primary);
 }
 
-.cage-management .MuiIconButton-root:hover {
+.end-items .MuiIconButton-root:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-[data-theme='dark'] .cage-management .MuiIconButton-root:hover {
+[data-theme='dark'] .end-items .MuiIconButton-root:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-.cage-management .MuiIconButton-root.Mui-disabled {
+.end-items .MuiIconButton-root.Mui-disabled {
   color: var(--text-tertiary);
 }
 
-/* Empty State Overrides for CAGE */
-.cage-management .empty-state {
+/* Empty State Overrides for End Items */
+.end-items .empty-state {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,8 +169,8 @@
   padding: 80px 20px;
 }
 
-.cage-management .empty-state p,
-.cage-management .empty-state .MuiTypography-root {
+.end-items .empty-state p,
+.end-items .empty-state .MuiTypography-root {
   font-size: 16px;
   color: var(--text-secondary);
   margin: 0;
@@ -179,7 +178,7 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .cage-header {
+  .end-items-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
@@ -209,7 +208,7 @@
     gap: 8px;
   }
 
-  .cage-management .icon-button {
+  .end-items .icon-button {
     width: 32px;
     height: 32px;
   }

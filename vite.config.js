@@ -16,6 +16,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@assets': path.resolve(__dirname, './src/assets'),
       '@common': path.resolve(__dirname, './src/common'),
+      '@contexts': path.resolve(__dirname, './src/contexts'),
     },
   },
   server: {

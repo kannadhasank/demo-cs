@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { logout } from '@store/slices/authSlice';
 import { toggleTheme } from '@store/slices/themeSlice';
 import { toggleSidebar } from '@store/slices/sidebarSlice';
+import { useEndItem } from '@contexts/EndItemContext';
 import './Header.css';
 
 const Header = () => {
@@ -12,6 +14,8 @@ const Header = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { theme } = useSelector((state) => state.theme);
+  const { selectedEndItem, endItems, selectEndItem } = useEndItem();
+  const [isEndItemDropdownOpen, setIsEndItemDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -70,10 +74,48 @@ const Header = () => {
           </svg>
           <span className="logo-text">{t('app.title')}</span>
         </div>
+
+        {/* End Item Selector */}
+        <div className="end-item-selector">
+          <button
+            className="end-item-button"
+            onClick={() => setIsEndItemDropdownOpen(!isEndItemDropdownOpen)}
+          >
+            <span className="end-item-label">
+              {selectedEndItem ? selectedEndItem.name : 'Select end item'}
+            </span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              className="dropdown-icon"
+            >
+              <polyline points="6 9 12 15 18 9" strokeWidth="2" />
+            </svg>
+          </button>
+          {isEndItemDropdownOpen && endItems.length > 0 && (
+            <div className="end-item-dropdown">
+              {endItems.map((item) => (
+                <button
+                  key={item.id}
+                  className={`dropdown-item ${selectedEndItem?.id === item.id ? 'active' : ''}`}
+                  onClick={() => {
+                    selectEndItem(item);
+                    setIsEndItemDropdownOpen(false);
+                  }}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="header-right">
-        <div className="language-selector">
+        {/* <div className="language-selector">
           <select
             value={i18n.language}
             onChange={(e) => changeLanguage(e.target.value)}
@@ -83,7 +125,7 @@ const Header = () => {
             <option value="es">Español</option>
             <option value="fr">Français</option>
           </select>
-        </div>
+        </div> */}
 
         <button className="icon-button" onClick={handleThemeToggle} title={t('theme.toggle')}>
           {theme === 'light' ? (
@@ -115,25 +157,6 @@ const Header = () => {
             <path d="M13.73 21a2 2 0 0 1-3.46 0" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
-
-        <button className="icon-button" title="Help">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <circle cx="12" cy="12" r="10" strokeWidth="2" />
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" strokeWidth="2" strokeLinecap="round" />
-            <circle cx="12" cy="17" r="0.5" fill="currentColor" strokeWidth="2" />
-          </svg>
-        </button>
-
-        <button className="icon-button" title="Settings">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <circle cx="12" cy="12" r="3" strokeWidth="2" />
-            <path
-              d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"
-              strokeWidth="2"
-            />
-          </svg>
-        </button>
-
         <div className="user-menu">
           <button className="user-button">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
