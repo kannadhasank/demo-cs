@@ -16,7 +16,7 @@
   },
   "navigation": {
     "dashboard": "Dashboard",
-    "cage": "CAGE Management",
+    "cage": "CAGE",
     "endItem": "End Item",
     "dataModule": "Data Module",
     "publications": "Publications",
@@ -30,15 +30,15 @@
     "users": "Users",
     "tools": "Tools",
     "entities": "Entities",
-    "usersManagement": "Users management",
+    "usersManagement": "User management",
     "settings": "Settings",
     "manageModules": "Manage Modules",
-    "dataValidate": "Data Validate",
+    "dataValidate": "Data Validator",
     "search": "Search",
     "publishing": "Publishing",
     "import": "Import",
     "export": "Export",
-    "commonInformationRepository": "Common Information repository"
+    "commonInformationRepository": "CIR"
   },
   "cage": {
     "management": "CAGE Management",

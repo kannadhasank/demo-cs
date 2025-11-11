@@ -32,9 +32,9 @@ const ConfirmDialog = ({
           <Close />
         </IconButton>
 
-        <div className="icon-wrapper">
+        {/* <div className="icon-wrapper">
           <Warning className="warning-icon" />
-        </div>
+        </div> */}
 
         <Typography className="confirm-message">
           {title} - {message}

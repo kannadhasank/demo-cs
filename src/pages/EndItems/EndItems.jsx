@@ -199,7 +199,7 @@ const EndItems = () => {
                 <TableRow>
                   <TableCell colSpan={columns.length}>
                     <Box className="empty-state">
-                      <Typography>There are no End Item available</Typography>
+                      <Typography>There are no End Items available</Typography>
                     </Box>
                   </TableCell>
                 </TableRow>

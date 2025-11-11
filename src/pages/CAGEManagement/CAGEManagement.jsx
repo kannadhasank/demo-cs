@@ -189,7 +189,7 @@ const CAGEManagement = () => {
                 <TableRow>
                   <TableCell colSpan={columns.length}>
                     <Box className="empty-state">
-                      <Typography>There are no CAGE available</Typography>
+                      <Typography>There are no CAGE list available</Typography>
                     </Box>
                   </TableCell>
                 </TableRow>
