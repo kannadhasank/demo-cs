@@ -4,6 +4,7 @@ import themeReducer from './slices/themeSlice';
 import sidebarReducer from './slices/sidebarSlice';
 import cageReducer from './slices/cageSlice';
 import endItemReducer from './slices/endItemSlice';
+import s1000dReducer from './slices/s1000dSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     sidebar: sidebarReducer,
     cage: cageReducer,
     endItem: endItemReducer,
+    s1000d: s1000dReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

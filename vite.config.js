@@ -21,5 +21,13 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    proxy: {
+      '/api/adonis': {
+        target: 'https://adonis.hcl.com/webapi/api',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/adonis/, ''),
+        secure: false,
+      },
+    },
   },
 });

@@ -1,0 +1,227 @@
+.s1000d-container {
+  padding: 24px;
+  background-color: #f5f7fa;
+  min-height: calc(100vh - 64px);
+}
+
+/* Transform Cards Container - Horizontal Layout */
+.transform-cards-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 8px 0;
+}
+
+/* Individual Card */
+.transform-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  min-width: 280px;
+  flex-shrink: 0;
+}
+
+/* Card Header - For cards with download links */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+
+/* Card Label */
+.card-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.card-label .required {
+  color: #d32f2f;
+}
+
+/* Card Content - Horizontal items inside card */
+.card-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Select Control */
+.select-control {
+  min-width: 100px;
+}
+
+.styled-select {
+  background-color: #f5f7fa;
+  border-radius: 4px;
+}
+
+.styled-select .MuiOutlinedInput-notchedOutline {
+  border-color: #e0e0e0;
+}
+
+.styled-select:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #1976d2;
+}
+
+/* File Input Wrapper */
+.file-input-wrapper {
+  flex: 1;
+  min-width: 180px;
+}
+
+.file-input-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background-color: #f5f7fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-input-label:hover {
+  border-color: #1976d2;
+  background-color: #f0f4ff;
+}
+
+.file-input-label span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.upload-icon {
+  color: #666;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Inner Arrow (between elements in same card) */
+.inner-arrow {
+  color: #1976d2;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* Card Arrow (between cards) */
+.card-arrow {
+  color: #1976d2;
+  font-size: 24px;
+  margin: 0 8px;
+  flex-shrink: 0;
+  align-self: center;
+  margin-top: 24px;
+}
+
+/* Download Link */
+.download-link {
+  text-transform: none;
+  font-size: 12px;
+  color: #1976d2;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.download-link:hover {
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.download-link .MuiButton-startIcon {
+  margin-right: 4px;
+}
+
+.download-link .MuiSvgIcon-root {
+  font-size: 16px;
+}
+
+/* Transform Button */
+.transform-button {
+  background-color: #1976d2;
+  color: white;
+  text-transform: none;
+  padding: 10px 32px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.transform-button:hover {
+  background-color: #1565c0;
+}
+
+.transform-button:disabled {
+  background-color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .transform-cards-container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .card-arrow {
+    display: none;
+  }
+
+  .transform-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .card-content {
+    flex-wrap: wrap;
+  }
+
+  .file-input-wrapper {
+    min-width: 100%;
+  }
+
+  .inner-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .s1000d-container {
+    padding: 16px;
+  }
+
+  .transform-card {
+    padding: 12px 16px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .select-control {
+    width: 100%;
+  }
+
+  .transform-button {
+    width: 100%;
+  }
+}

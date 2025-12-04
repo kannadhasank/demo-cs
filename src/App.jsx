@@ -9,6 +9,7 @@ import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import CAGEManagement from './pages/CAGEManagement/CAGEManagement';
 import EndItems from './pages/EndItems/EndItems';
+import S1000D from './pages/S1000D/S1000D';
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -38,6 +39,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="end-items" element={<EndItems />} />
           <Route path="cage-management" element={<CAGEManagement />} />
+          <Route path="s1000d" element={<S1000D />} />
           <Route path="projects" element={<div>Projects Page</div>} />
           <Route path="data-module">
             <Route path="manage" element={<div>Manage Modules</div>} />
